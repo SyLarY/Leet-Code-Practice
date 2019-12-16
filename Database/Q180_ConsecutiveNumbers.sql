@@ -22,7 +22,25 @@ appears consecutively for at least three times.
 +-----------------+
 */
 
+--Approach 1
+--Runtime: 695ms
 SELECT DISTINCT Num AS ConsecutiveNums
 FROM Logs
 WHERE (id +1, num) IN (SELECT * FROM Logs) 
 AND (id + 2, Num) IN (SELECT * FROM Logs); 
+
+
+--Approach 2: 
+--Runtime: 1169ms
+SELECT DISTINCT
+    l1.Num AS ConsecutiveNums
+FROM
+    Logs l1,
+    Logs l2,
+    Logs l3
+WHERE
+    l1.Id = l2.Id - 1
+    AND l2.Id = l3.Id - 1
+    AND l1.Num = l2.Num
+    AND l2.Num = l3.Num;
+
