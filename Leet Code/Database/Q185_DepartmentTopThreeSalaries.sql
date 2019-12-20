@@ -42,7 +42,8 @@ There are only two employees in the Sales department,
 Henry earns the highest salary while Sam earns the second highest salary.
 */
 
-
+--Approach 1: Using subqueries
+--Runtime: 1229 ms
 SELECT d.Name AS 'Department', e1.Name AS 'Employee', e1.Salary
 FROM Employee e1
 JOIN Department d
@@ -51,4 +52,13 @@ WHERE 3 >
     (SELECT COUNT(DISTINCT e2.Salary)
     FROM Employee e2
     WHERE e2.Salary > e1.Salary
-            AND e1.DepartmentId = e2.DepartmentId ) ;
+            AND e1.DepartmentId = e2.DepartmentId );
+
+--Approach 2: using group by, without subqueries
+--Runtime: 1573 ms
+SELECT D.Name AS Department, E.Name AS Employee, E.Salary 
+  FROM Department D, Employee E, Employee E2  
+  WHERE D.ID = E.DepartmentId AND E.DepartmentId = E2.DepartmentId AND 
+  E.Salary <= E2.Salary
+  GROUP BY D.ID,E.Name HAVING COUNT(DISTINCT E2.Salary) <= 3
+  ORDER BY D.Name, E.Salary DESC;
