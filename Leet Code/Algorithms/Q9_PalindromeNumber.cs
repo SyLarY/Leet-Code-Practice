@@ -28,8 +28,8 @@ public class Solution {
         int temp = x;
    
         while (x>0){
-            r = x % 10;//get last digit of x
-            sum = (sum * 10) + r;//add r to sum to make a reverted number of x
+            r = x % 10;//get last digit of x as r -- pop
+            sum = (sum * 10) + r;//add r to sum to make a reverted number of x -- push
             x = x / 10;//get rid of last digit of x
         }
         
