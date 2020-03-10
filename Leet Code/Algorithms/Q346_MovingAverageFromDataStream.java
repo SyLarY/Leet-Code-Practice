@@ -10,29 +10,33 @@ m.next(3) = (1 + 10 + 3) / 3
 m.next(5) = (10 + 3 + 5) / 3
  
 */
-//Approch 1 : Using List
-//Runtime: 160ms
-public class MovingAverage {
+//Approch 2 : Using Deque
+//Runtime: 21ms
+
+class MovingAverage {
     int size;
-    List<int> list = new List<int>();
-    
+    int sum, count = 0 ;
+    Deque queue = new ArrayDeque<Integer>();
     /** Initialize your data structure here. */
     public MovingAverage(int size) {
         this.size = size;
     }
     
-    public double Next(int val) {
-        list.Add(val);
-        int sum =0;
-        for(int i = Math.Max(0, (list.Count - size)); i < list.Count; i++){
-            sum += list[i];
-        }
-        return (sum/(double)(list.Count>=size?size:list.Count));
+    public double next(int val) {
+        count++;
+        queue.add(val);
+        int tail = count > size ? (int)queue.poll() : 0;
+        
+        sum = sum - tail + val;
+        
+        return (double)sum / Math.min(size, count);
+        
+        
     }
 }
 
 /**
  * Your MovingAverage object will be instantiated and called as such:
  * MovingAverage obj = new MovingAverage(size);
- * double param_1 = obj.Next(val);
+ * double param_1 = obj.next(val);
  */
