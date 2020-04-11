@@ -12,6 +12,8 @@ Input: [[7,10],[2,4]]
 Output: true
  */
 
+
+//Runtime: 4 ms
 class Solution {
     public boolean canAttendMeetings(int[][] intervals) {
         Arrays.sort(intervals, new Comparator<int[]>(){
