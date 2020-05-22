@@ -14,6 +14,7 @@ The second 1's next greater number needs to search circularly, which is also 2.
 Note: The length of given array won't exceed 10000.
  */
 
+//Runtime: 133 ms
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
         int[] result = new int[nums.length];
