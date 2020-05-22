@@ -14,6 +14,8 @@ The second 1's next greater number needs to search circularly, which is also 2.
 Note: The length of given array won't exceed 10000.
  */
 
+
+//Approach: Brute Force
 //Runtime: 133 ms
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
@@ -27,6 +29,28 @@ class Solution {
                     break;
                 }
             }
+        }
+        
+        return result;
+    }
+}
+
+//Approach: Stack + HashMap
+//Runtime: 20 ms
+class Solution {
+    public int[] nextGreaterElements(int[] nums) {
+        
+        int length = nums.length;
+        int[] result = new int[length];
+        Arrays.fill(result, -1);
+        Stack<Integer> stack = new Stack<Integer>();
+        
+        for(int i = 0; i < 2*length; i++){
+            while(!stack.isEmpty() && nums[stack.peek()] < nums[i%length]){
+                result[stack.pop()] = nums[i%length];
+            }
+            
+            stack.push(i%length);
         }
         
         return result;
