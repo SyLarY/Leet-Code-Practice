@@ -40,3 +40,22 @@ class Solution {
         
     }
 }
+
+
+//Runtime: 0ms
+//Approach: Two Pointer, start from the end of nums1
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        
+        int p = m-1;
+        int q = n-1;
+        int index = m+n-1;
+
+        while(p>=0 && q>=0){
+            nums1[index--] = nums1[p] > nums2[q] ? nums1[p--] : nums2[q--];
+        }
+        
+        System.arraycopy(nums2, 0, nums1, 0, q+1);
+
+    }
+}
